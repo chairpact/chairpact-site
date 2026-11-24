@@ -44,11 +44,8 @@ python3 tools/logo/build.py tools/logo/source.png docs/assets --dark tint
 ```
 This rebuilds the logos, the favicons and the social share image (`docs/assets/og-image.png`). The light-mode logos are always the original artwork. `--dark` sets the dark-mode treatment: `tint`, `white` or `keep` (see the top of the script). Leave it out to keep the existing dark files.
 
-## Going live (moving off Zoho)
-1. Push to GitHub. In **Settings → Pages**, set the source to the `main` branch and the `/docs` folder, and set the custom domain to `www.chairpact.com`.
-2. At the DNS provider, replace the Zoho landing-page records:
-   - `www` CNAME → `chairpact.github.io`
-   - `@` (apex) A records → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-3. Don't touch the MX, SPF (`v=spf1 include:zohomail.com`) or other TXT records. Zoho Mail keeps working.
-4. Once the certificate has been issued, tick **Enforce HTTPS** in Settings → Pages.
-5. Unpublish the Zoho landing page.
+## Hosting
+- **Site:** GitHub Pages publishes the `docs/` folder on the `main` branch (Settings → Pages). Merging to `main` puts changes live within a minute or two.
+- **`www.chairpact.com`:** a CNAME record pointing to `chairpact.github.io`, set in Zoho DNS.
+- **`chairpact.com`:** has no A records. Zoho **Domain Forwarding** sends it to `https://www.chairpact.com` with a 301 redirect, keeping the page path.
+- **Email:** the Zoho Mail MX, SPF, DKIM (`zmail._domainkey`) and verification records are separate from the site. Leave them as they are.
