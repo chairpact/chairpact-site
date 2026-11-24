@@ -15,10 +15,16 @@ The site lives in `docs/`, and GitHub Pages publishes from that folder. Everythi
 - `tools/logo/` holds the original logo image and the script that generates the logo files
 
 ## Preview locally
+Any static file server works. The site itself needs no Python, Node or build step. Use either of these:
+
 ```sh
+# Python (built into macOS, nothing to install)
 python3 -m http.server 8080 -d docs
+
+# Node (downloads the `serve` package the first time)
+npx serve docs -l 8080
 ```
-Then open http://localhost:8080. Use the server rather than opening the HTML file directly, because the links between pages rely on it.
+Then open http://localhost:8080. Use a server rather than opening the HTML file directly, because the links between pages (`training/`, `../`) rely on it. If you see an old version, press Cmd+Shift+R to reload without the cache.
 
 ## Navigation
 In the navbar, plain links scroll to a section on the current page, and pill buttons go to another page or are the main action. The link for the section you're viewing is highlighted (see `docs/main.js`). The footer lists both pages' sections in labelled columns.
